@@ -126,12 +126,12 @@ INSERT INTO Room (patient_id, staff_id, admission_date) VALUES
 (2, 2, '2024-04-21');
 
 INSERT INTO Prescription (patient_id, medication_name, prescription_date, prescription_cost) VALUES
-(1, 'Medicine X', '2024-04-20', 50),
-(2, 'Medicine Y', '2024-04-21', 75);
+(1, 'Medicine X', '2024-04-20', 450),
+(2, 'Medicine Y', '2024-04-21', 750);
 
 INSERT INTO Invoice (patient_id, description, cost, total) VALUES
-(1, 'Consultation Fee', 100, 100),
-(2, 'Medication Cost', 75, 75);
+(1, 'Consultation Fee', 450, 100),
+(2, 'Medication Cost', 750, 75);
 
 INSERT INTO Appointment (patient_id, doctor_id, date) VALUES
 (1, 1, '2024-04-25'),
