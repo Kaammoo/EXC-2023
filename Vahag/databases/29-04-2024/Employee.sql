@@ -1,8 +1,10 @@
 use Hospital;
 
---1
-select h.address as H_address, h.name as H_name, 
-d.name as D_name, doc.name as Doc_name, p.name as P_name 
+select h.address as "Hospital address", 
+h.name as "Hospital name", 
+d.name as "Department name", 
+doc.name as "Doctor name", 
+p.name as "Patient name" 
 from Hospital h
 inner join Department d on h.id = d.hospital_id
 inner join Doctor doc on doc.department_id = d.id
@@ -10,28 +12,31 @@ inner join Patient p on p.id = d.hospital_id
 inner join Invoice i on i.patient_id = p.id
 where i.description = 'Doctor Visit';
 
---2
-select p.name, p.phone_number
+select p.name as "Patient name", 
+p.phone_number as "Patient phone number"
 from Patient p
 inner join Prescription pr
 on pr.patient_id = p.id
-where pr.prescription_date like '%-04-%';
+where month(pr.prescription_date) = 4;
 
---3
-select d.name, d.specialization
+select d.name as "Doctor name", 
+d.specialization as "Doctor specialization"
 from Doctor d
 inner join Department dep
 on d.department_id = dep.id
-where dep.id = 1; -- can change department id there
+where dep.id = 1; 
 
---4
-select d.name as D_name, doc.name as Doc_name, doc.specialization 
+select d.name as "Department name",
+doc.name as "Doctor name"
 from Department d
 left join Doctor doc
 on d.id = doc.department_id;
 
---5
-select p.name, p.phone_number, p.address, p.date_of_birth, ph.name
+select p.name as "Patient name", 
+p.phone_number as "Patient phone number", 
+p.address as "Patient address", 
+p.date_of_birth as "Patient date of birth", 
+ph.name as "Pharmacy name"
 from Patient p
 inner join Pharmacy ph on p.pharmacy_id = ph.id
 inner join Invoice i on i.patient_id = p.id
