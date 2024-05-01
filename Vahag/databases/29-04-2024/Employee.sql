@@ -8,7 +8,8 @@ p.name as "Patient name"
 from Hospital h
 inner join Department d on h.id = d.hospital_id
 inner join Doctor doc on doc.department_id = d.id
-inner join Patient p on p.id = d.hospital_id
+inner join Appoinment a on doc.id = a.doctor_id
+inner join Patient p on p.id = a.patient_id
 inner join Invoice i on i.patient_id = p.id
 where i.description = 'Doctor Visit';
 
