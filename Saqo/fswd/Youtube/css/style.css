@@ -11,8 +11,6 @@ body {
     grid-template-areas:
         "header header"
         "side content";
-
-    /* grid-template-rows: auto auto; */
 }
 
 .grid-header {
@@ -129,18 +127,15 @@ body {
 }
 
 .grid-side {
-    /* display: grid; */
     position: fixed;
     top: 56px;
     width: 220px;
-    /* height: 100%; */
     height: calc(100% - 56px);
     grid-area: side;
     background-color: transparent;
     overflow-y: scroll;
     align-items: center;
     padding: 10px;
-    /* background-color: aqua; */
 }
 
 .side-items {
@@ -151,7 +146,6 @@ body {
     width: 200px;
     padding: 6px 10px;
     border-radius: 16px;
-    /* border: 1px solid rgb(39, 39, 39); */
     color: white;
     align-items: center;
 }
@@ -169,7 +163,6 @@ body {
 
 .dashed {
     border: 1px solid rgb(34, 34, 34);
-    /* color: rgb(34, 34, 34); */
 }
 
 .side-text-item {
@@ -180,7 +173,6 @@ body {
     width: 200px;
     padding: 6px 10px;
     border-radius: 16px;
-    /* border: 1px solid rgb(39, 39, 39); */
     color: white;
     align-items: center;
 }
