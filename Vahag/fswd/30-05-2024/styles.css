@@ -44,21 +44,21 @@ body {
 }
 
 #buttons .operator {
-    background-color: #899ac3;
+  background-color: #899ac3;
 }
 
 #buttons .operator:hover {
-    background-color: #a7b1c7;
+  background-color: #a7b1c7;
 }
 
 #buttons .operator:active {
-    background-color: #6680be;
+  background-color: #6680be;
 }
 
 #buttons button:hover {
-    background-color: rgb(196, 196, 196);
+  background-color: rgb(196, 196, 196);
 }
 
 #buttons button:active {
-    background-color: rgb(143, 140, 140);
+  background-color: rgb(143, 140, 140);
 }
