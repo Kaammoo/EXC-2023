@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#board {
+  width: 302px;
+  border: 1px solid black;
+  font-size: 0;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  display: inline-block;
+  font-size: 50px;
+  border: 1px solid #000;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background 0.1s;
+
+  &:hover {
+    background-color: rgb(235, 235, 235);
+  }
+}
+
+.win-line {
+  position: absolute;
+  height: 5px;
+  background-color: red;
+  transform-origin: 0 50%;
+  z-index: 10;
+}
