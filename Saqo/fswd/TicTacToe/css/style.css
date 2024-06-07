@@ -11,7 +11,7 @@
 
 body {
     display: grid;
-    grid-template-columns: 50% 30%;
+    grid-template-columns: 45% 30%;
     justify-content: space-around;
     background-color: #27505C;
     color: var(--orange);
@@ -24,13 +24,13 @@ body {
     align-items: center;
     justify-content: center;
     justify-items: center;
-    height: 100%;
     padding: 50px;
     gap: 20px;
     border: 1px solid;
     border-color: var(--orange);
     border-radius: 15px;
     height: 100%;
+    box-shadow: 0px 0px 10px#F2C14E;
 }
 
 #playerText {
@@ -46,6 +46,7 @@ body {
     font-size: 17px;
     font-weight: bold;
     transition: 200ms transform;
+    box-shadow: 0px 0px 10px#F2C14E;
 }
 
 #restartBtn:hover {
@@ -74,15 +75,18 @@ body {
 }
 
 #history {
-    /* display: grid; */
-    /* grid-template-rows: 1fr; */
-    /* align-items: start; */
-    height: 700px;
+    height: 800px;
     border: 1px solid;
     border-color: var(--orange);
     border-radius: 15px;
     padding: 15px;
     overflow-y: scroll;
+    text-align: center;
+    box-shadow: 0px 0px 10px #F2C14E;
+}
+
+#history h2 {
+    margin-bottom: 10px;
 }
 
 .history-box {

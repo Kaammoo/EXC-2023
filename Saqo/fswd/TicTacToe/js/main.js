@@ -22,9 +22,10 @@ function boxClicked(e) {
         spaces[id] = currentPlayer;
         e.target.innerText = currentPlayer;
 
-        if (palyerHasWan() !== false) {
+        let playerhaswan = palyerHasWan();
+
+        if (playerhaswan) {
             playerText.innerText = `Player \'${currentPlayer}\' has wan!`;
-            let winningBlocks = palyerHasWan();
 
             winningBlocks.map(box => boxes[box].style.backgroundColor = winnerIndicator);
             boxes.forEach(box => box.removeEventListener('click', boxClicked));
@@ -56,7 +57,7 @@ function palyerHasWan() {
             return [a, b, c];
         }
     }
-    return false;
+    return [];
 }
 
 restartBtn.addEventListener('click', restart);
@@ -81,7 +82,6 @@ function getCurrentTime() {
     let minutes = now.getMinutes();
     let seconds = now.getSeconds();
 
-    // Add leading zero if needed
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
@@ -93,7 +93,6 @@ function createHistoryBox(player) {
     let currentTime = getCurrentTime();
     const historyBox = document.createElement('div');
     historyBox.classList.add('history-box')
-    // historyBox.innerText = `Player ${player} has wan!\tTime: ${currentTime}`;
     historyBox.style.whiteSpace = 'pre';
     historyBox.innerText = `Player ${player} has won!\t\t\t\tTime: ${currentTime}`;
 
