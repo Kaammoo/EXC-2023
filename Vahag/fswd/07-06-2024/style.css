@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+#apple-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.apple {
+  position: absolute;
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  top: 0;
+}
+
+#basket {
+  position: absolute;
+  bottom: 0;
+  left: 50%; /* Start at the center of the page */
+  transform: translateX(-50%);
+  width: 200px; /* Adjust size as needed */
+  height: auto;
+}
+
+#time,
+#score {
+  position: absolute;
+  width: 135px;
+  background-color: red;
+  border-radius: 8px;
+  font-size: 35px;
+  text-align: center;
+}
+
+#time {
+  top: 15px;
+  left: 15px;
+  background-color: red;
+}
+
+#score {
+  top: 70px;
+  left: 15px;
+  background-color: green;
+}
