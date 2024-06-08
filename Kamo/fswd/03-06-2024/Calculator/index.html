@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="main">
+      <input type="text" class="text" id="display" disabled />
+      <div class="under_text">
+        <div class="numbers">
+          <button class="num_button">7</button>
+          <button class="num_button">8</button>
+          <button class="num_button">9</button>
+          <button class="num_button">4</button>
+          <button class="num_button">5</button>
+          <button class="num_button">6</button>
+          <button class="num_button">1</button>
+          <button class="num_button">2</button>
+          <button class="num_button">3</button>
+          <button class="num_button zero_button">0</button>
+          <button class="accept_button">=</button>
+        </div>
+        <div class="math1">
+          <button class="button">AC</button>
+          <button class="button">DEL</button>
+          <button class="button">.</button>
+          <button class="button">%</button>
+        </div>
+        <div class="math">
+          <button class="button">+</button>
+          <button class="button">-</button>
+          <button class="button">*</button>
+          <button class="button">/</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const display = document.getElementById("display");
+      const numButtons = document.querySelectorAll(".num_button");
+      const buttons = document.querySelectorAll(".button");
+      const acceptButton = document.querySelector(".accept_button");
+
+      numButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          display.value += button.textContent;
+        });
+      });
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const action = button.textContent;
+          if (action === "AC") {
+            display.value = "";
+          } else if (action === "DEL") {
+            display.value = display.value.slice(0, -1);
+          } else {
+            display.value += action;
+          }
+        });
+      });
+
+      acceptButton.addEventListener("click", () => {
+        try {
+          display.value = eval(display.value);
+        } catch {
+          display.value = "Error";
+        }
+      });
+    </script>
+  </body>
+</html>
