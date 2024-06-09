@@ -8,7 +8,10 @@ body,
 html {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #apple-container {
@@ -19,7 +22,7 @@ html {
 
 .apple {
   position: absolute;
-  width: 100px; /* Adjust as needed */
+  width: 100px;
   height: auto;
   top: 0;
 }
@@ -27,9 +30,9 @@ html {
 #basket {
   position: absolute;
   bottom: 0;
-  left: 50%; /* Start at the center of the page */
+  left: 50%;
   transform: translateX(-50%);
-  width: 200px; /* Adjust size as needed */
+  width: 200px;
   height: auto;
 }
 
