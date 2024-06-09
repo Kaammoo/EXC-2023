@@ -1,3 +1,7 @@
+// function startGame() {
+//     window.location.href = ..
+// }
+
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("apple-container");
   const timeValue = document.getElementById("time-value");
@@ -21,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to create and animate an apple
   function createApple() {
     const apple = document.createElement("img");
-    apple.src = "./images/apple.png";
+    apple.src = "../images/apple.png";
     apple.alt = "Apple";
     apple.className = "apple";
 
@@ -72,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
       scoreValue.textContent = score;
       apple.remove();
 
-      if (score >= 5) {
-        window.location.href = "./win.html";
+      if (score >= 10) {
+        window.location.href = "../pages/win.html";
       }
     }
   }
@@ -100,12 +104,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", moveBasket);
 
   const interval = setInterval(() => {
-    if (time > 0) {
+    if (time > 1) {
       --time;
       changeTime();
     } else {
       clearInterval(interval);
-      window.location.href = "./lose.html";
+      window.location.href = "../pages/lose.html";
     }
   }, 1000);
 });
