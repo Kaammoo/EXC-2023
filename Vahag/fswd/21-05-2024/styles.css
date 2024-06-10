@@ -1,0 +1,145 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #3b4664;
+  font-family: "Arial", sans-serif;
+}
+
+.calculator {
+  background-color: #252d44;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 320px;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch span {
+  margin-right: 10px;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.switch span {
+  margin: 0 5px;
+  font-size: 12px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.toggle {
+  width: 50px;
+  height: 20px;
+  background-color: #d03f2f;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.display {
+  background-color: #181f32;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: right;
+  padding: 20px;
+  color: white;
+  font-size: 2em;
+  box-sizing: border-box;
+}
+
+.display input {
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2em;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  background-color: #eae3dc;
+  border: none;
+  border-radius: 5px;
+  color: #252d44;
+  font-size: 1.5em;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #ccc;
+}
+
+.btn.del {
+  background-color: #647198;
+  color: white;
+}
+
+.btn.del:hover {
+  background-color: #555;
+}
+
+.btn.operator {
+  background-color: #eae3dc;
+  color: #252d44;
+}
+
+.btn.operator:hover {
+  background-color: #ccc;
+}
+
+.btn.reset {
+  background-color: #647198;
+  color: white;
+  grid-column: span 2;
+}
+
+.btn.reset:hover {
+  background-color: #555;
+}
+
+.btn.equal {
+  background-color: #d03f2f;
+  color: white;
+  grid-column: span 2;
+}
+
+.btn.equal:hover {
+  background-color: #b0352a;
+}
