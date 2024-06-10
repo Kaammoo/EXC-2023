@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="library">
+        <h2>Library</h2>
+        <div class="books">
+          <h3>Available Books</h3>
+          <ul id="available-books"></ul>
+        </div>
+        <div class="users">
+          <h3>Registered Users</h3>
+          <ul id="registered-users"></ul>
+        </div>
+      </div>
+      <div class="user-interactions">
+        <h2>User Interactions</h2>
+        <form id="borrow-form">
+          <label for="user">Select User:</label>
+          <select id="user">
+            <!-- To do -->
+          </select>
+          <label for="book">Select Book:</label>
+          <select id="book">
+            <!-- To do -->
+          </select>
+          <button type="submit">Borrow Book</button>
+        </form>
+        <form id="return-form">
+          <label for="user-return">Select User:</label>
+          <select id="user-return">
+            <!-- To do -->
+          </select>
+          <label for="book-return">Select Book:</label>
+          <select id="book-return">
+            <!-- To do -->
+          </select>
+          <button type="submit">Return Book</button>
+        </form>
+      </div>
+      <div class="interactions">
+        <h2>Add New User</h2>
+        <form id="add-user-form">
+          <label for="user-name">Name:</label>
+          <input type="text" id="user-name" name="user-name" />
+          
+          <label for="user-id">ID:</label>
+          <input type="text" id="user-id" name="user-id" />
+          <button type="submit">Add User</button>
+        </form>
+
+        <h2>Add New Book</h2>
+        <form id="add-book-form">
+          <label for="book-title">Title:</label>
+          <input type="text" id="book-title" name="book-title" />
+
+          <label for="book-author">Author:</label>
+          <input type="text" id="book-author" name="book-author" />
+
+          <label for="book-genre">Genre:</label>
+          <input type="text" id="book-genre" name="book-genre" />
+
+          <label for="book-isbn">ISBN:</label>
+          <input type="text" id="book-isbn" name="book-isbn" />
+          <button type="submit">Add Book</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
