@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       case "KeyA":
         basketPosition = Math.max(basketPosition - step, 100);
         break;
-      case "KeyD":
+      case "KeyS":
         basketPosition = Math.min(
           basketPosition + step,
           window.innerWidth - 100
