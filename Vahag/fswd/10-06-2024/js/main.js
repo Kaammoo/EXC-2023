@@ -1,5 +1,4 @@
 // Book class implementation
-
 class Book {
   constructor(title, author, genre, isbn) {
     this.title = title;
@@ -25,10 +24,13 @@ class Book {
   borrowBook() {
     this.availability = false;
   }
+
+  returnBook() {
+    this.availability = true;
+  }
 }
 
 // User class implementation
-
 class User {
   constructor(name, id, books = []) {
     this.name = name;
@@ -44,13 +46,16 @@ class User {
     }
   }
 
+  returnBook(book) {
+    this.books = this.books.filter((b) => b.isbn !== book.isbn);
+  }
+
   getBooks() {
     return this.books;
   }
 }
 
 // Library class implementation
-
 class Library {
   constructor(books, users) {
     this.books = books;
@@ -66,11 +71,10 @@ class Library {
   }
 
   handBook(book) {
-    this.books = this.books.filter((b) => b !== book);
+    this.books = this.books.filter((b) => b.isbn !== book.isbn);
   }
 
   registerUser(users) {
-    // can i write this more optimally?
     if (Array.isArray(users)) {
       this.users.push(...users);
     } else {
@@ -113,9 +117,11 @@ function displayAvailableBooks(books) {
   availableBooks.innerHTML = "";
 
   books.forEach((book) => {
-    const listItem = document.createElement("li");
-    listItem.textContent = `${book.title} by ${book.author} (${book.isbn})`;
-    availableBooks.appendChild(listItem);
+    if (book.checkAvailability()) {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${book.title} by ${book.author} (${book.isbn})`;
+      availableBooks.appendChild(listItem);
+    }
   });
 }
 
@@ -140,8 +146,23 @@ function displayRegisteredUsers(users) {
 }
 
 function borrowBook(user, book) {
-  library.handBook(book);
-  user.borrowBooks(book);
+  if (book.checkAvailability()) {
+    book.borrowBook();
+    user.borrowBooks(book);
+    library.handBook(book);
+    displayAvailableBooks(library.getBooks());
+    displayRegisteredUsers(library.getUsers());
+  } else {
+    alert("The book is not available.");
+  }
+}
+
+function returnBook(user, book) {
+  book.returnBook();
+  user.returnBook(book);
+  library.addBooks(book);
+  displayAvailableBooks(library.getBooks());
+  displayRegisteredUsers(library.getUsers());
 }
 
 function addNewBook(title, author, genre, isbn) {
@@ -156,8 +177,25 @@ function registerNewUser(name, id) {
   displayRegisteredUsers(library.getUsers());
 }
 
+function displaySearchedBooks(books, elemId) {
+  const resultsList = document.getElementById(elemId);
+
+  resultsList.innerHTML = "";
+
+  books.forEach((book) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${book.title} by ${book.author} (${book.isbn})`;
+    resultsList.appendChild(listItem);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const userForm = document.getElementById("add-user-form");
+  const bookForm = document.getElementById("add-book-form");
+  const borrowForm = document.getElementById("borrow-form");
+  const returnForm = document.getElementById("return-form");
+  const searchForm = document.getElementById("search-form");
+  const searchGenreForm = document.getElementById("search-genre-form");
 
   userForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -170,11 +208,179 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("User with this ID already exists!");
       } else {
         registerNewUser(userName, userId);
+        userForm.reset();
+        displayRegisteredUsers(library.getUsers());
+        createUsersOptions(library.getUsers());
       }
     }
-
-    userForm.reset();
   });
+
+  bookForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const bookTitle = document.getElementById("book-title").value;
+    const bookAuthor = document.getElementById("book-author").value;
+    const bookGenre = document.getElementById("book-genre").value;
+    const bookISBN = document.getElementById("book-isbn").value;
+
+    if (bookTitle && bookAuthor && bookGenre && bookISBN) {
+      if (library.getBooks().some((book) => book.isbn === bookISBN)) {
+        alert("Book with this ISBN already exists!");
+      } else {
+        addNewBook(bookTitle, bookAuthor, bookGenre, bookISBN);
+        bookForm.reset();
+        displayAvailableBooks(library.getBooks());
+        createBooksOptions(library.getBooks());
+      }
+    }
+  });
+
+  borrowForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const userId = document.getElementById("user").value;
+    const bookISBN = document.getElementById("book").value;
+
+    const user = library.getUsers().find((user) => user.id === userId);
+    const book = library.getBooks().find((book) => book.isbn === bookISBN);
+
+    if (user && book) {
+      borrowBook(user, book);
+      displayAvailableBooks(library.getBooks());
+      displayRegisteredUsers(library.getUsers());
+      createBooksOptions(library.getBooks());
+      createReturnUsersOptions(library.getUsers());
+    } else {
+      alert("User or book not found, or the book is not available!");
+    }
+  });
+
+  returnForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const userId = document.getElementById("user-return").value;
+    const bookISBN = document.getElementById("book-return").value;
+
+    const user = library.getUsers().find((user) => user.id === userId);
+    const book = user.getBooks().find((book) => book.isbn === bookISBN);
+
+    if (user && book) {
+      returnBook(user, book);
+      displayAvailableBooks(library.getBooks());
+      displayRegisteredUsers(library.getUsers());
+      createBooksOptions(library.getBooks());
+      createReturnUsersOptions(library.getUsers());
+    } else {
+      alert("User or book not found!");
+    }
+  });
+
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const input = document.getElementById("search-query");
+    searchBooks(input);
+  });
+
+  searchGenreForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const input = document.getElementById("search-genre");
+    searchBooksByGenre(input);
+  });
+
+  function searchBooksByGenre(input) {
+    const query = input.value.toLowerCase();
+    const books = library.getBooks();
+
+    const searchedBooks = books.filter((book) => {
+      return book.genre.toLowerCase().includes(query);
+    });
+
+    displaySearchedBooks(searchedBooks, "genre-list");
+  }
+
+  function searchBooks(input) {
+    const query = input.value.toLowerCase();
+    const books = library.getBooks();
+
+    const searchedBooks = books.filter((book) => {
+      const titleMatch = book.title.toLowerCase().includes(query);
+      const authorMatch = book.author.toLowerCase().includes(query);
+      return titleMatch || authorMatch;
+    });
+
+    displaySearchedBooks(searchedBooks, "results-list");
+  }
+
+  function createUsersOptions(users) {
+    const userLabel = document.getElementById("user");
+    userLabel.innerHTML = "";
+
+    users.forEach((user) => {
+      const option = document.createElement("option");
+      option.value = user.id;
+      option.textContent = user.name;
+
+      userLabel.appendChild(option);
+    });
+  }
+
+  function createBooksOptions(books) {
+    const bookLabel = document.getElementById("book");
+    bookLabel.innerHTML = "";
+
+    books.forEach((book) => {
+      if (book.checkAvailability()) {
+        const option = document.createElement("option");
+        option.value = book.isbn;
+        option.textContent = `${book.title} by ${book.author}`;
+
+        bookLabel.appendChild(option);
+      }
+    });
+  }
+
+  function createReturnUsersOptions(users) {
+    const userLabel = document.getElementById("user-return");
+
+    userLabel.innerHTML = "";
+
+    users.forEach((user) => {
+      if (user.getBooks().length > 0) {
+        const option = document.createElement("option");
+        option.value = user.id;
+        option.textContent = user.name;
+
+        userLabel.appendChild(option);
+      }
+    });
+
+    userLabel.addEventListener("change", function () {
+      const selectedUser = users.find((user) => user.id === this.value);
+      createReturnBooksOptions(selectedUser ? selectedUser.getBooks() : []);
+    });
+
+    userLabel.dispatchEvent(new Event("change"));
+  }
+
+  function createReturnBooksOptions(books) {
+    const bookLabel = document.getElementById("book-return");
+
+    bookLabel.innerHTML = "";
+
+    books.forEach((book) => {
+      const option = document.createElement("option");
+      option.value = book.isbn;
+      option.textContent = `${book.title} by ${book.author}`;
+
+      bookLabel.appendChild(option);
+    });
+  }
+
+  createUsersOptions(library.getUsers());
+  createBooksOptions(library.getBooks());
+  createReturnUsersOptions(library.getUsers());
 });
 
 window.onload = () => {

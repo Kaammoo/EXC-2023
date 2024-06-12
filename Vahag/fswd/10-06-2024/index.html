@@ -18,18 +18,40 @@
           <h3>Registered Users</h3>
           <ul id="registered-users"></ul>
         </div>
+        <div class="search-books">
+          <h3>Search Books</h3>
+          <form id="search-form">
+            <input
+              type="text"
+              id="search-query"
+              placeholder="Enter book title or author"
+            />
+            <button type="submit">Search</button>
+          </form>
+          <div id="search-results">
+            <h3>Search Results</h3>
+            <ul id="results-list"></ul>
+          </div>
+        </div>
+        <div class="search-books-genre">
+          <h3>Search Books by Genre</h3>
+          <form id="search-genre-form">
+            <input type="text" id="search-genre" placeholder="Enter genre" />
+            <button type="submit">Search</button>
+          </form>
+          <div id="genre-result">
+            <h3>Search Results</h3>
+            <ul id="genre-list"></ul>
+          </div>
+        </div>
       </div>
       <div class="user-interactions">
         <h2>User Interactions</h2>
         <form id="borrow-form">
           <label for="user">Select User:</label>
-          <select id="user">
-            <!-- To do -->
-          </select>
+          <select id="user"></select>
           <label for="book">Select Book:</label>
-          <select id="book">
-            <!-- To do -->
-          </select>
+          <select id="book"></select>
           <button type="submit">Borrow Book</button>
         </form>
         <form id="return-form">
@@ -49,7 +71,7 @@
         <form id="add-user-form">
           <label for="user-name">Name:</label>
           <input type="text" id="user-name" name="user-name" />
-          
+
           <label for="user-id">ID:</label>
           <input type="text" id="user-id" name="user-id" />
           <button type="submit">Add User</button>
