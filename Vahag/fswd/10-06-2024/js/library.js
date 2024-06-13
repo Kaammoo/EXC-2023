@@ -1,6 +1,6 @@
 // Library class implementation
 
-class Library {
+export class Library {
   constructor(books, users) {
     this.books = books;
     this.users = users;
@@ -15,7 +15,7 @@ class Library {
   }
 
   handBook(book) {
-    this.books = this.books.filter((b) => b !== book);
+    this.books = this.books.filter(b => b !== book);
   }
 
   registerUser(users) {

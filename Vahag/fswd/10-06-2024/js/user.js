@@ -1,6 +1,6 @@
 // User class implementation
 
-class User {
+export class User {
   constructor(name, id, books = []) {
     this.name = name;
     this.id = id;

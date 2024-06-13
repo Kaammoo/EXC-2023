@@ -1,6 +1,6 @@
 // Book class implementation
 
-class Book {
+export class Book {
   constructor(title, author, genre, isbn) {
     this.title = title;
     this.author = author;
